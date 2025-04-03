@@ -1,0 +1,92 @@
+
+body{
+  justify-items: center;
+  background-color: cadetblue;
+}
+.Container{
+  margin: 50px;
+  height: 600px;
+  width: 300px;
+  border: 1px solid gold;
+  border-radius: 25px;
+  background-color: aqua;
+  justify-items: center;
+  cursor: pointer;
+  box-shadow: inset 0 0 10px black;
+  position: relative;
+}
+
+.Container:hover{
+  background-color: lightcoral;
+}
+
+.image-card{
+  height: 600px;
+  border-radius: 25px;
+  width: 300px;
+  opacity: 0;
+}
+.Container:hover  .image-card{
+  opacity: 5;
+}
+
+.text-card{
+  justify-items: center;
+  height: 200px;
+  width: 250px;
+  border: 2px solid black;
+  border-radius: 25px;
+  opacity: 0;
+  transform: translateY(-250px);
+}
+.Container:hover > .image-card >.text-card {
+  opacity: 1;
+  transform: translateY(-100px);
+
+
+
+
+}
+/* this is used to mack the run animation**/
+
+@property --angle{
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.Container::after, .Container::before{
+  
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(from var(--angle) ,transparent,red,blue,yellow);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: 3px;
+  border-radius: 25px;
+  animation: 3s spin linear infinite;
+  opacity: 1;
+
+}
+@keyframes spin{
+  from{
+    --angle:0deg
+
+  }
+  to{
+    --angle:360deg
+
+  }
+}
+
+.Container::before{
+  filter: blur(1.5rem);
+  opacity: 0.5;
+}
+
+.Container:hover > .Container::after{
+  opacity: 1px;
+}
